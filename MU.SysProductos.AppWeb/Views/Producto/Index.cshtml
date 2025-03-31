@@ -1,0 +1,90 @@
+﻿@model List<Producto>
+<h1>Lista de Productos</h1>
+<div>
+    <a asp-controller="Producto" asp-action="Create" class="btn btn-primary">Nuevo</a> |
+    <a asp-controller="Producto" asp-action="ReportesProductos" class="btn btn-secondary">Generar PDF</a>
+    <a asp-controller="Producto" asp-action="ReportesProductosExcel" class="btn btn-secondary">Generar Excel</a>
+    <br />
+    <br />
+    <!-- Formulario para subir Excel -->
+    <div class="card p-3">
+        <h5 class="card-title text-center mb-3">Subir Archivo Excel de Productos</h5>
+        <form asp-action="SubirExcelProductos" asp-controller="Producto" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="archivoExcel" class="form-label">Seleccionar archivo Excel</label>
+                <input type="file" name="archivoExcel" class="form-control" required />
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-dark btn-lg">Subir y Guardar</button>
+            </div>
+        </form>
+    </div>
+    @if (Model != null)
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Precio</td>
+                    <td>Cantidad</td>
+                    <td>Fecha de Creacion</td>
+                    <td>Acciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <th>@producto.Nombre</th>
+                        <th>@producto.Precio</th>
+                        <th>@producto.CantidadDisponible</th>
+                        <th>@producto.FechaCreacion</th>
+
+                        <th>
+                            <a class="btn btn-primary" asp-controller="Producto" asp-action="Edit" asp-route-id="@producto.Id">Editar</a> |
+                            <a class="btn btn-danger" asp-controller="Producto" asp-action="Delete" asp-route-id="@producto.Id">Eliminar</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<!-- Estilos personalizados -->
+<style>
+    .card {
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn-dark {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .btn-lg {
+        font-size: 1.1rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+    .mt-4 {
+        margin-top: 30px !important;
+    }
+</style>

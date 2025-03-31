@@ -1,0 +1,94 @@
+﻿@model List<Proveedor>
+<h1>Lista de Proveedores</h1>
+<div>
+    <a asp-controller="Proveedor" asp-action="Create" class="btn btn-primary">Nuevo</a> |
+    <a asp-controller="Proveedor" asp-action="ReportesProveedores" class="btn btn-secondary">Generar PDF</a>
+    <a asp-controller="Proveedor" asp-action="ReportesProveedoresExcel" class="btn btn-secondary">Generar Excel</a>
+    <br />
+    <br />
+    <!-- Formulario para subir Excel -->
+    <div class="card p-3">
+        <h5 class="card-title text-center mb-3">Subir Archivo Excel de Proveedores</h5>
+        <form asp-action="SubirExcelProveedores" asp-controller="Proveedor" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="archivoExcel" class="form-label">Seleccionar archivo Excel</label>
+                <input type="file" name="archivoExcel" class="form-control" required />
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-dark btn-lg">Subir y Guardar</button>
+            </div>
+        </form>
+    </div>
+
+    <br />
+    <br />
+    @if (Model != null)
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>NRC</td>
+                    <td>Dirección</td>
+                    <td>Telefono</td>
+                    <td>Email</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var proveedor in Model)
+                {
+                    <tr>
+                        <th>@proveedor.Nombre</th>
+                        <th>@proveedor.NRC</th>
+                        <th>@proveedor.Direccion</th>
+                        <th>@proveedor.Telefono</th>
+                        <th>@proveedor.Email</th>
+
+                        <th>
+                            <a class="btn btn-primary" asp-contproveedorler="Proveedor" asp-action="Edit" asp-route-id="@proveedor.Id">Editar</a> |
+                            <a class="btn btn-danger" asp-contproveedorler="Proveedor" asp-action="Delete" asp-route-id="@proveedor.Id">Eliminar</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<!-- Estilos personalizados -->
+<style>
+    .card {
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn-dark {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .btn-lg {
+        font-size: 1.1rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+    .mt-4 {
+        margin-top: 30px !important;
+    }
+</style>
