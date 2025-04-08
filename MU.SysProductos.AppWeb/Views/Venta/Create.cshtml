@@ -1,24 +1,24 @@
-﻿@model MU.SysProductos.EN.Compra
+﻿@model MU.SysProductos.EN.Venta
 
 @{
-    ViewData["Title"] = "Crear Compra";
+    ViewData["Title"] = "Crear Venta";
     var productos = ViewBag.Productos as List<Producto>;
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm border-0">
         <div class="card-header bg-dark text-white text-center">
-            <h3 class="mb-0">Factura de Compra</h3>
+            <h3 class="mb-0">Factura de Venta</h3>
         </div>
         <div class="card-body">
             <form asp-action="Create" method="post">
 
-                <!-- SELECCIÓN DEL PROVEEDOR -->
+                <!-- SELECCIÓN DEL Cliente -->
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Proveedor</label>
-                    <select id="ProveedorId" name="IdProveedor" class="form-select" required>
-                        <option value="">Seleccione un proveedor</option>
-                        @foreach (var item in ViewBag.Proveedores)
+                    <label class="form-label fw-bold">Cliente</label>
+                    <select id="ClienteId" name="IdCliente" class="form-select" required>
+                        <option value="">Seleccione un cliente</option>
+                        @foreach (var item in ViewBag.Clientes)
                         {
                             <option value="@item.Value">@item.Text</option>
                         }
@@ -63,9 +63,9 @@
                     </div>
                 </div>
 
-                <!-- TABLA DETALLE DE COMPRA -->
+                <!-- TABLA DETALLE DE Venta -->
                 <div class="mt-4">
-                    <h5 class="fw-bold">Detalles de Compra</h5>
+                    <h5 class="fw-bold">Detalles de Venta</h5>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
                             <tr>
@@ -91,13 +91,13 @@
                 <!-- BOTÓN GUARDAR -->
                 <div class="text-center mt-3">
                     <button type="submit" class="btn btn-primary btn-lg shadow-sm">
-                        Guardar Compra
+                        Guardar Venta
                     </button>
                 </div>
             </form>
         </div>
     </div>
-</div>  
+</div>
 
 @section Scripts {
     <script>
@@ -139,10 +139,10 @@
             let tr = document.createElement("tr");
 
             tr.innerHTML = `
-                <td>${nombreProducto}<input type="hidden" name="DetalleCompras[${index}].IdProducto" value="${idProducto}"></td>
-                <td class="text-center"><input type="number" name="DetalleCompras[${index}].Cantidad" class="form-control cantidad text-center" min="1" value="${cantidad}"></td>
-                <td class="text-end"><input type="text" name="DetalleCompras[${index}].PrecioUnitario" class="form-control precio text-end" value="${precio}"></td>
-                <td class="text-end"><input type="text" name="DetalleCompras[${index}].Subtotal" class="form-control subtotal text-end fw-bold" value="${subtotal}" readonly></td>
+                <td>${nombreProducto}<input type="hidden" name="DetalleVentas[${index}].IdProducto" value="${idProducto}"></td>
+                <td class="text-center"><input type="number" name="DetalleVentas[${index}].Cantidad" class="form-control cantidad text-center" min="1" value="${cantidad}"></td>
+                <td class="text-end"><input type="text" name="DetalleVentas[${index}].PrecioUnitario" class="form-control precio text-end" value="${precio}"></td>
+                <td class="text-end"><input type="text" name="DetalleVentas[${index}].Subtotal" class="form-control subtotal text-end fw-bold" value="${subtotal}" readonly></td>
                 <td class="text-center"><button type="button" class="btn btn-danger btnEliminar">X</button></td>
             `;
 
@@ -164,6 +164,6 @@
                 total += parseFloat(sub.value) || 0;
             });
             document.getElementById("total").value = total.toFixed(2);
-        }   
+        }
     </script>
-}  
+}

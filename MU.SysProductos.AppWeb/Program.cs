@@ -5,6 +5,7 @@ using MU.SysProductos.DAL;
 using OfficeOpenXml;
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 // Agrega el contexto de base de datos SysLoginDBContext al contenedor de servicios de la aplicación.  
 builder.Services.AddDbContext<MUSysProductosDBContext>(options =>
@@ -21,6 +22,12 @@ builder.Services.AddScoped<ProveedorDAL>();
 builder.Services.AddScoped<ProveedorBL>();
 builder.Services.AddScoped<CompraDAL>();
 builder.Services.AddScoped<CompraBL>();
+builder.Services.AddScoped<ClienteDAL>();
+builder.Services.AddScoped<ClienteBL>();
+builder.Services.AddScoped<VentaDAL>();
+builder.Services.AddScoped<VentaBL>();
+
+
 
 builder.Services.AddControllersWithViews();
 

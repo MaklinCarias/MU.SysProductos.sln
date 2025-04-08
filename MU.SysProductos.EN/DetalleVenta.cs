@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace MU.SysProductos.EN
 {
-    public class DetalleCompra
+    public class DetalleVenta
     {
         [Key]
         public int Id { get; set; }
 
-        public int IdCompra { get; set; }
+        public int IdVenta { get; set; }
 
         [Required(ErrorMessage = "El producto es obligatorio.")]
         [ForeignKey("Producto")]
@@ -33,7 +33,7 @@ namespace MU.SysProductos.EN
         public decimal SubTotal { get; set; }
 
         // Relación con Compra (Cada detalle pertenece a una compra)  
-        public virtual Compra? Compra { get; set; }
+        public virtual Venta? Venta { get; set; }
 
         // Relación con Producto (Cada detalle está asociado a un producto)  
         public virtual Producto? Producto { get; set; }
